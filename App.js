@@ -6,27 +6,20 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Counter from './components/Pages/Counter';
 import AddProduct from './components/Pages/AddProduct';
-
-function ProductScreen({ product }) {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>{product}!</Text>
-    </View>
-  );
-}
+import Cart from './components/Pages/Cart';
 const Tab = createBottomTabNavigator();
 export default function App() {
 
   const [products, setProducts] = useState([]);
 
-
   useEffect(() => {
     console.log(products);
-  }, [products])
+  }, [products]);
+
   return (
     <NavigationContainer>
       <Tab.Navigator
-        screenOptions={({ route }) => ({
+        screenOptions={({ route, navigation }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             if (route.name === "Counter") {
@@ -47,10 +40,13 @@ export default function App() {
           tabBarActiveTintColor: "blue",
           tabBarInactiveTintColor: "grey",
         })}
+        initialRouteName="Add product"
       >
         <Tab.Screen name="Counter" component={Counter} />
         <Tab.Screen name="Add product" component={AddProduct} initialParams={{ handleProducts: setProducts }} />
-        <Tab.Screen name="Cart" component={ProductScreen} initialParams={products} />
+        <Tab.Screen name="Cart">
+          {() => <Cart products={products} />}
+        </Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>
     // <View style={styles.container}>
