@@ -1,13 +1,14 @@
 import React from "react"
 import styled from "styled-components/native"
-import { FlatList } from "react-native"
+import { FlatList,  } from "react-native"
 
 const StyledSafeAreaView = styled.SafeAreaView`
-    
+    top: 0;
+    height: 95%;
     width: 100%;
     align-self: center;
 `
-const StyledView = styled.View`
+const StyledPressable = styled.Pressable`
     margin: 10px;
     background-color:#8554d3d4;
     padding: 5px;
@@ -20,15 +21,20 @@ const StyledText = styled.Text`
     margin: 5px;
     text-align: center;
     color: ${props => props.textColor};
-    
+
 `
-const List = ({products}) => {
-    console.log('Productos lista',products);
+const List = ({products, deleteProduct}) => {
     const renderItem = ({item}) => {
        return (
-            <StyledView>
+            <StyledPressable onLongPress={() => deleteProduct(item)} style={({pressed})=> [
+          {
+            backgroundColor: pressed
+              ? 'rgba(167, 131, 235, 0.918)'
+              : '#8554d3d4'
+          }
+        ]}>
             <StyledText textColor="black">{item.name}</StyledText>
-            </StyledView>
+            </StyledPressable>
        )
     }
     return (

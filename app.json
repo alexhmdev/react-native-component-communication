@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "expo-tabs",
-    "slug": "expo-tabs",
+    "name": "tabComponent-communication",
+    "slug": "tabcomponent-communication",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,6 +27,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "A simple app with a product list, communicated between components with react native"
   }
 }

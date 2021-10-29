@@ -1,6 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -14,8 +13,7 @@ export default function App() {
 
   useEffect(() => {
     console.log(products);
-  }, [products]);
-
+  }, [products])
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -37,30 +35,38 @@ export default function App() {
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: "blue",
-          tabBarInactiveTintColor: "grey",
+          tabBarInactiveTintColor: "grey"
         })}
         initialRouteName="Add product"
       >
-        <Tab.Screen name="Counter" component={Counter} />
-        <Tab.Screen name="Add product" component={AddProduct} initialParams={{ handleProducts: setProducts }} />
-        <Tab.Screen name="Cart">
-          {() => <Cart products={products} />}
+        <Tab.Screen name="Counter" component={Counter} options={{
+          tabBarActiveBackgroundColor: '#F5F4F4',
+          tabBarActiveTintColor: '#0000ff',
+          tabBarHideOnKeyboard: true,
+          headerShadowVisible: true,
+          headerStyle: { backgroundColor: 'blue' },
+          headerTintColor: 'white',
+        }} />
+        <Tab.Screen name="Add product" component={AddProduct} initialParams={{ handleProducts: setProducts }}
+          options={{
+            tabBarActiveBackgroundColor: '#F5F4F4',
+            tabBarActiveTintColor: '#dc143c',
+            tabBarHideOnKeyboard: true,
+            headerShadowVisible: true,
+            headerStyle: { backgroundColor: '#ff5858' },
+            headerTintColor: 'white',
+          }} />
+        <Tab.Screen name="Cart" options={{
+          tabBarActiveBackgroundColor: '#F5F4F4',
+          tabBarActiveTintColor: '#8554d3d4',
+          tabBarHideOnKeyboard: true,
+          headerShadowVisible: true,
+          headerStyle: { backgroundColor: '#8554d3d4' },
+          headerTintColor: 'white',
+        }}>
+          {() => <Cart products={products} setProducts={setProducts} />}
         </Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>
-    // <View style={styles.container}>
-    //   <Text>Open up App.js to start working on your app!</Text>
-    //   <StatusBar style="auto" />
-    // </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
